@@ -14,7 +14,7 @@ int MallobIpasir::solve() {
     _failed_assumptions.clear();
 
     // Write formula
-    std::string formulaFilename = "/tmp/ipasir_mallob_" + std::to_string(getpid()) + ".cnf";
+    formulaFilename = "/tmp/ipasir_mallob_" + std::to_string(getpid()) + ".cnf";
     std::cout << "Writing " << _num_cls << " clauses and " << _assumptions.size() 
         << " assumptions to " << formulaFilename << std::endl;
     std::ofstream fOut(formulaFilename);
@@ -117,6 +117,8 @@ void MallobIpasir::destruct() {
     std::string jsonFilename = _api_directory + "/new/ipasir." + jobName + ".json";
     std::ofstream o(jsonFilename);
     o << std::setw(4) << j << std::endl;
+
+    remove(formulaFilename.c_str());
 }
 
 

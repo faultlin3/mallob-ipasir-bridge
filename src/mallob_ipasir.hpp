@@ -33,6 +33,8 @@ private:
     std::vector<int> _model;
     std::set<int> _failed_assumptions;
 
+    std::string formulaFilename;
+
 public:
     MallobIpasir() :
         _api_directory(MALLOB_BASE_DIRECTORY + std::string("/.api/jobs.") + MALLOB_API_INDEX + std::string("/")),

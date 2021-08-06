@@ -23,13 +23,7 @@ int MallobIpasir::solve() {
         if (lit == 0) fOut << "0\n";
         else fOut << lit << " ";
     }
-    if (!_assumptions.empty()) {
-        fOut << "a ";
-        for (int lit : _assumptions) {
-            fOut << lit << " ";
-        }
-        fOut << "0\n";
-    }
+
     fOut.close();
 
     // Write JSON
@@ -41,8 +35,12 @@ int MallobIpasir::solve() {
         {"priority", 1.000}, 
         {"wallclock-limit", "0"}, 
         {"cpu-limit", "0"}, 
-        {"incremental", true}
+        {"incremental", true},
     };
+    
+    if (!_assumptions.empty()) {
+        j["assumptions"] = _assumptions;
+    }
     if (_revision > 0) {
         j["precursor"] = "ipasir." + getJobName(_revision-1);
     }
